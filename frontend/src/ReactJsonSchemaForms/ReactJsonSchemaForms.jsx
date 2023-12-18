@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Form from '@rjsf/mui';
 import validator from '@rjsf/validator-ajv8';
 
+import TrainFieldTemplate from './Templates/TrainFieldTemplate';
+import ModelFieldTemplate from './Templates/ModelFieldTemplate';
+import AugmentationsFieldTemplate from './Templates/AugmentationsFieldTemplate';
 
 const ReactJsonSchemaForms = () => {
   const [schema, setSchema] = useState({});
@@ -9,14 +12,13 @@ const ReactJsonSchemaForms = () => {
   const [augmentationsSchema, setAugmentationsSchema] = useState({});
   const [networkSchema, setNetworkSchema] = useState({});
   const [config, setConfig] = useState({});
+  const [trainConfig, setTrainConfig] = useState({});
+  const [modelConfig, setModelConfig] = useState({});
+  const [augmentationsConfig, setAugmentationsConfig] = useState({});
 
-  const handleConfig = ({ formData }) => {
+  const handleConfigChanges = ({ formData }) => {
     setConfig(formData);
     console.log('config: ', formData);
-  };
-
-  const handleFormSubmit = ({ formData }) => {
-    console.log('submit: ', formData);
   };
 
   const handleJsonSchema = (data) => {
@@ -41,30 +43,34 @@ const ReactJsonSchemaForms = () => {
   return (
     <div className="form-container">
       <h1>React Json Schema Form</h1>
-        <h3>Network Configuration</h3>
         <Form
           schema={networkSchema}
           validator={validator}
-          onChange={handleConfig}
+          onChange={handleConfigChanges}
           onError={log('errors')}
           children={true} // hide the submit button
+          uiSchema={{ "ui:ObjectFieldTemplate": ModelFieldTemplate }}
+        
         />
-        <h3>Train Configuration</h3>
+
         <Form
           schema={trainSchema}
           validator={validator}
-          onChange={handleConfig}
+          onChange={handleConfigChanges}
           onError={log('errors')}
           children={true} // hide the submit button
+          uiSchema={{
+            "ui:ObjectFieldTemplate": TrainFieldTemplate
+          }}        
         />
 
-        <h3>Augmentations Configuration</h3>
         <Form
           schema={augmentationsSchema}
           validator={validator}
-          onChange={handleConfig}
+          onChange={handleConfigChanges}
           onError={log('errors')}
           children={true} // hide the submit button
+          // uiSchema={{"ui:ObjectFieldTemplate": AugmentationsFieldTemplate}}
         />
     </div>
   );

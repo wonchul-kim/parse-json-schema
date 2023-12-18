@@ -1,9 +1,0 @@
-/* Custom styles for form container and forms row */
-.form-container {
-    margin: 20px;
-  }
-  
-  .forms-row {
-    display: flex;
-    gap: 20px; /* Adjust the gap between forms as needed */
-  }
