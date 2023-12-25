@@ -6,13 +6,15 @@ import { makeStyles } from '@material-ui/styles';
 import './styles.css';
 
 const useStyles = makeStyles({
-  hsv: {
-
+  device_ids: {
+    marginLeft: 10,
+    marginRight: 10,
+    padding: 10,
+    width: 400,
   },
-
 });
 
-function AugmentationsFieldTemplate(props) {
+function PreprocessFieldTemplate(props) {
   const classes = useStyles();
   return (
     <div>
@@ -22,14 +24,20 @@ function AugmentationsFieldTemplate(props) {
       </div>
       <Grid container={true} spacing={1} className='container' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         {props.properties.map((element, index) => {
-          console.log(">>>> ", element, element.content)
-          return (
-            <div className='elements'>{element.content}</div>
-          )
+          if (element.content.key === 'device_ids'){
+            return (
+              <div className={classes.device_ids}>{element.content}</div>
+            )
+          }
+          else {
+            return (
+              <div className='elements'>{element.content}</div>
+            )
+          }
         })}
       </Grid>
     </div>
   );
 }
 
-export default AugmentationsFieldTemplate;
+export default PreprocessFieldTemplate;

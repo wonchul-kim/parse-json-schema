@@ -6,15 +6,15 @@ import { makeStyles } from '@material-ui/styles';
 import './styles.css';
 
 const useStyles = makeStyles({
-  device_ids: {
+  roi: {
     marginLeft: 10,
     marginRight: 10,
     padding: 10,
-    width: 400,
-  },
+    width: 250,
+  }, 
 });
 
-function TrainFieldTemplate(props) {
+function RoiFieldTemplate(props) {
   const classes = useStyles();
   return (
     <div>
@@ -24,14 +24,18 @@ function TrainFieldTemplate(props) {
       </div>
       <Grid container={true} spacing={1} className='container' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         {props.properties.map((element, index) => {
-          if (element.content.key === 'device_ids'){
-            return (
-              <div className={classes.device_ids}>{element.content}</div>
-            )
-          }
-          else {
+        if (!['top_left_x', 'top_left_y', 'width', 'height'].includes(element.content.key)) {
             return (
               <div className='elements'>{element.content}</div>
+            )
+          }
+        })}
+      </Grid>
+      <Grid container={true} spacing={1} className='container' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        {props.properties.map((element, index) => {
+        if (['top_left_x', 'top_left_y', 'width', 'height'].includes(element.content.key)) {
+          return (
+              <div className={classes.roi}>{element.content}</div>
             )
           }
         })}
@@ -40,4 +44,4 @@ function TrainFieldTemplate(props) {
   );
 }
 
-export default TrainFieldTemplate;
+export default RoiFieldTemplate;

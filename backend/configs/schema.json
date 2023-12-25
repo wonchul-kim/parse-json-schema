@@ -1,345 +1,456 @@
-{'TrainConfig': {'properties': {'device': {'fronzen': True, 'title': 'Device', 'type': 'string'
-            }, 'device_ids': {'anyOf': [
-                    {'type': 'integer'
+{"DataConfig": {"properties": {"input_dir": {"title": "Input Dir", "type": "string"
+            }, "output_dir": {"title": "Output Dir", "type": "string"
+            }, "classes": {"anyOf": [
+                    {"type": "string"
                     },
-                    {'type': 'string'
+                    {"items": {"type": "string"
+                        }, "type": "array"
                     }
-                ], 'fronzen': True, 'title': 'Device Ids'
-            }, 'epochs': {'fronzen': True, 'title': 'Epochs', 'type': 'integer'
-            }, 'batch_size': {'fronzen': True, 'title': 'Batch Size', 'type': 'integer'
-            }, 'optimizer': {'fronzen': True, 'title': 'Optimizer', 'type': 'string'
-            }, 'ml_framework': {'fronzen': True, 'title': 'Ml Framework', 'type': 'string'
-            }, 'image_loading_lib': {'fronzen': True, 'title': 'Image Loading Lib', 'type': 'string'
-            }, 'image_loading_mode': {'fronzen': True, 'title': 'Image Loading Mode', 'type': 'string'
-            }, 'amp': {'default': False, 'fronzen': True, 'title': 'Amp', 'type': 'boolean'
-            }, 'patience': {'default': 0, 'fronzen': True, 'title': 'Patience', 'type': 'integer'
-            }, 'freeze': {'default': 0, 'metadata': {'description': 'how many layers you want to freeze'
-                }, 'title': 'Freeze', 'type': 'integer'
-            }, 'seed_model': {'anyOf': [
-                    {'type': 'string'
-                    },
-                    {'type': 'null'
-                    }
-                ], 'default': None, 'fronzen': True, 'title': 'Seed Model'
-            }, 'loss_fn': {'title': 'Loss Fn', 'type': 'string'
-            }, 'focal_loss': {'title': 'Focal Loss', 'type': 'boolean'
-            }, 'use_multiprocessing': {'default': False, 'title': 'Use Multiprocessing', 'type': 'boolean'
-            }, 'workers': {'default': 8, 'title': 'Workers', 'type': 'integer'
-            }, 'max_queue_size': {'default': 32, 'title': 'Max Queue Size', 'type': 'integer'
-            }, 'bg_weights': {'anyOf': [
-                    {'items': {'type': 'number'
-                        }, 'type': 'array'
-                    },
-                    {'type': 'string'
-                    },
-                    {'type': 'null'
-                    }
-                ], 'default': None, 'title': 'Bg Weights'
-            }, 'bg_weights_applied_epoch': {'anyOf': [
-                    {'items': {'type': 'integer'
-                        }, 'type': 'array'
-                    },
-                    {'type': 'string'
-                    },
-                    {'type': 'null'
-                    }
-                ], 'default': None, 'title': 'Bg Weights Applied Epoch'
-            }, 'annotation_format': {'const': 'labelme', 'title': 'Annotation Format'
-            }, 'dataset_type': {'enum': ['iter', 'iterable'
-                ], 'title': 'Dataset Type', 'type': 'string'
+                ], "title": "Classes"
+            }, "image_exts": {"items": {"enum": ["bmp", "png", "jpg"
+                    ], "type": "string"
+                }, "title": "Image Exts", "type": "array"
+            }, "make_output_dir": {"default": true, "title": "Make Output Dir", "type": "boolean"
+            }, "forced": {"default": true, "title": "Forced", "type": "boolean"
+            }, "lower": {"default": true, "title": "Lower", "type": "boolean"
             }
-        }, 'required': ['device', 'device_ids', 'epochs', 'batch_size', 'optimizer', 'ml_framework', 'image_loading_lib', 'image_loading_mode', 'loss_fn', 'focal_loss', 'annotation_format', 'dataset_type'
-        ], 'title': 'TrainConfig', 'type': 'object'
-    }, 'PreProcessConfig': {'properties': {'normalize': {'anyOf': [
-                    {'type': 'object'
+        }, "required": ["input_dir", "output_dir", "classes"
+        ], "title": "DataConfig", "type": "object"
+    }, "LoggingConfig": {"properties": {"tf_log_level": {"default": 0, "metadata": {"description": "TensorFlow log level"
+                }, "title": "Tf Log Level", "type": "integer"
+            }, "log_stream_level": {"default": "DEBUG", "title": "Log Stream Level", "type": "string"
+            }, "log_file_level": {"default": "DEBUG", "title": "Log File Level", "type": "string"
+            }, "output_dir": {"default": "", "title": "Output Dir", "type": "string"
+            }, "logs_dir": {"default": "", "title": "Logs Dir", "type": "string"
+            }, "configs_dir": {"default": "", "title": "Configs Dir", "type": "string"
+            }, "weights_dir": {"default": "", "title": "Weights Dir", "type": "string"
+            }, "val_dir": {"default": "", "title": "Val Dir", "type": "string"
+            }, "debug_dir": {"default": "", "title": "Debug Dir", "type": "string"
+            }, "dataset_dir": {"default": "", "title": "Dataset Dir", "type": "string"
+            }, "vis_dir": {"default": "", "title": "Vis Dir", "type": "string"
+            }, "patches_dir": {"default": "", "title": "Patches Dir", "type": "string"
+            }, "labels_dir": {"default": "", "title": "Labels Dir", "type": "string"
+            }, "wb": {"default": false, "title": "Wb", "type": "boolean"
+            }, "aivdb": {"default": false, "title": "Aivdb", "type": "boolean"
+            }
+        }, "title": "LoggingConfig", "type": "object"
+    }, "PatchConfig": {"properties": {"use_patch": {"title": "Use Patch", "type": "boolean"
+            }, "centric": {"title": "Centric", "type": "boolean"
+            }, "sliding": {"title": "Sliding", "type": "boolean"
+            }, "width": {"minimum": 0, "title": "Width", "type": "integer"
+            }, "height": {"minimum": 0, "title": "Height", "type": "integer"
+            }, "overlap_ratio": {"anyOf": [
+                    {"type": "number"
                     },
-                    {'type': 'null'
+                    {"type": "integer"
                     }
-                ], 'title': 'Normalize'
-            }
-        }, 'required': ['normalize'
-        ], 'title': 'PreProcessConfig', 'type': 'object'
-    }, 'AugmentationConfig': {'$defs': {'AlbumentationsConfig': {'properties': {'GaussNoise': {'anyOf': [
-                            {'type': 'integer'
-                            },
-                            {'type': 'number'
-                            },
-                            {'type': 'object'
-                            }
-                        ], 'default': 0, 'metadata': {'description': ''
-                        }, 'title': 'Gaussnoise'
-                    }, 'Blur': {'anyOf': [
-                            {'type': 'integer'
-                            },
-                            {'type': 'number'
-                            },
-                            {'type': 'object'
-                            }
-                        ], 'default': 0, 'metadata': {'description': ''
-                        }, 'title': 'Blur'
-                    }, 'MedianBlur': {'anyOf': [
-                            {'type': 'integer'
-                            },
-                            {'type': 'number'
-                            },
-                            {'type': 'object'
-                            }
-                        ], 'default': 0, 'metadata': {'description': ''
-                        }, 'title': 'Medianblur'
-                    }, 'ToGray': {'anyOf': [
-                            {'type': 'integer'
-                            },
-                            {'type': 'number'
-                            },
-                            {'type': 'object'
-                            }
-                        ], 'default': 0, 'metadata': {'description': ''
-                        }, 'title': 'Togray'
-                    }, 'CLAHE': {'anyOf': [
-                            {'type': 'integer'
-                            },
-                            {'type': 'number'
-                            },
-                            {'type': 'object'
-                            }
-                        ], 'default': 0, 'metadata': {'description': ''
-                        }, 'title': 'Clahe'
-                    }, 'RandomBrightnessContrast': {'anyOf': [
-                            {'type': 'integer'
-                            },
-                            {'type': 'number'
-                            },
-                            {'type': 'object'
-                            }
-                        ], 'default': 0, 'metadata': {'description': ''
-                        }, 'title': 'Randombrightnesscontrast'
-                    }, 'RandomGamma': {'anyOf': [
-                            {'type': 'integer'
-                            },
-                            {'type': 'number'
-                            },
-                            {'type': 'object'
-                            }
-                        ], 'default': 0, 'metadata': {'description': ''
-                        }, 'title': 'Randomgamma'
-                    }, 'ImageCompression': {'anyOf': [
-                            {'type': 'integer'
-                            },
-                            {'type': 'number'
-                            },
-                            {'type': 'object'
-                            }
-                        ], 'default': 0, 'metadata': {'description': ''
-                        }, 'title': 'Imagecompression'
-                    }, 'HorizontalFlip': {'anyOf': [
-                            {'type': 'integer'
-                            },
-                            {'type': 'number'
-                            },
-                            {'type': 'object'
-                            }
-                        ], 'default': 0, 'metadata': {'description': ''
-                        }, 'title': 'Horizontalflip'
-                    }, 'VerticalFlip': {'anyOf': [
-                            {'type': 'integer'
-                            },
-                            {'type': 'number'
-                            },
-                            {'type': 'object'
-                            }
-                        ], 'default': 0, 'metadata': {'description': ''
-                        }, 'title': 'Verticalflip'
-                    }, 'RandomRotate90': {'anyOf': [
-                            {'type': 'integer'
-                            },
-                            {'type': 'number'
-                            },
-                            {'type': 'object'
-                            }
-                        ], 'default': 0, 'metadata': {'description': ''
-                        }, 'title': 'Randomrotate90'
-                    }, 'Rotate': {'anyOf': [
-                            {'type': 'integer'
-                            },
-                            {'type': 'number'
-                            },
-                            {'type': 'object'
-                            }
-                        ], 'default': 0, 'metadata': {'description': ''
-                        }, 'title': 'Rotate'
-                    }, 'Transpose': {'anyOf': [
-                            {'type': 'integer'
-                            },
-                            {'type': 'number'
-                            },
-                            {'type': 'object'
-                            }
-                        ], 'default': 0, 'metadata': {'description': ''
-                        }, 'title': 'Transpose'
-                    }
-                }, 'title': 'AlbumentationsConfig', 'type': 'object'
-            }, 'YoloTransformationsConfig': {'properties': {'hsv': {'anyOf': [
-                            {'type': 'integer'
-                            },
-                            {'type': 'number'
-                            },
-                            {'type': 'object'
-                            }
-                        ], 'default': {'h': 0, 's': 0, 'v': 0
-                        }, 'metadata': {'description': ''
-                        }, 'title': 'Hsv'
-                    }, 'degrees': {'anyOf': [
-                            {'type': 'integer'
-                            },
-                            {'type': 'number'
-                            },
-                            {'type': 'object'
-                            }
-                        ], 'default': 0, 'metadata': {'description': ''
-                        }, 'title': 'Degrees'
-                    }, 'translate': {'anyOf': [
-                            {'type': 'integer'
-                            },
-                            {'type': 'number'
-                            },
-                            {'type': 'object'
-                            }
-                        ], 'default': 0, 'metadata': {'description': ''
-                        }, 'title': 'Translate'
-                    }, 'scale': {'anyOf': [
-                            {'type': 'integer'
-                            },
-                            {'type': 'number'
-                            },
-                            {'type': 'object'
-                            }
-                        ], 'default': 0, 'metadata': {'description': ''
-                        }, 'title': 'Scale'
-                    }, 'shear': {'anyOf': [
-                            {'type': 'integer'
-                            },
-                            {'type': 'number'
-                            },
-                            {'type': 'object'
-                            }
-                        ], 'default': 0, 'metadata': {'description': ''
-                        }, 'title': 'Shear'
-                    }, 'perspective': {'anyOf': [
-                            {'type': 'integer'
-                            },
-                            {'type': 'number'
-                            },
-                            {'type': 'object'
-                            }
-                        ], 'default': 0, 'metadata': {'description': ''
-                        }, 'title': 'Perspective'
-                    }, 'flipud': {'anyOf': [
-                            {'type': 'integer'
-                            },
-                            {'type': 'number'
-                            },
-                            {'type': 'object'
-                            }
-                        ], 'default': 0, 'metadata': {'description': ''
-                        }, 'title': 'Flipud'
-                    }, 'fliplr': {'anyOf': [
-                            {'type': 'integer'
-                            },
-                            {'type': 'number'
-                            },
-                            {'type': 'object'
-                            }
-                        ], 'default': 0, 'metadata': {'description': ''
-                        }, 'title': 'Fliplr'
-                    }, 'mosaic': {'anyOf': [
-                            {'type': 'integer'
-                            },
-                            {'type': 'number'
-                            },
-                            {'type': 'object'
-                            }
-                        ], 'default': 0, 'metadata': {'description': ''
-                        }, 'title': 'Mosaic'
-                    }, 'mixup': {'anyOf': [
-                            {'type': 'integer'
-                            },
-                            {'type': 'number'
-                            },
-                            {'type': 'object'
-                            }
-                        ], 'default': 0, 'metadata': {'description': ''
-                        }, 'title': 'Mixup'
-                    }, 'copy_paste': {'anyOf': [
-                            {'type': 'integer'
-                            },
-                            {'type': 'number'
-                            },
-                            {'type': 'object'
-                            }
-                        ], 'default': 0, 'metadata': {'description': ''
-                        }, 'title': 'Copy Paste'
-                    }, 'paste_in': {'anyOf': [
-                            {'type': 'integer'
-                            },
-                            {'type': 'number'
-                            },
-                            {'type': 'object'
-                            }
-                        ], 'default': 0, 'metadata': {'description': ''
-                        }, 'title': 'Paste In'
-                    }
-                }, 'title': 'YoloTransformationsConfig', 'type': 'object'
-            }
-        }, 'properties': {'Albumentations': {'allOf': [
-                    {'$ref': '#/$defs/AlbumentationsConfig'
-                    }
-                ], 'default': {}
-            }, 'Customs': {'allOf': [
-                    {'$ref': '#/$defs/YoloTransformationsConfig'
-                    }
-                ], 'default': {}
-            }
-        }, 'title': 'AugmentationConfig', 'type': 'object'
-    }, 'DebuggingConfig': {'properties': {'debug_dataset_ratio': {'anyOf': [
-                    {'type': 'number'
+                ], "title": "Overlap Ratio"
+            }, "num_involved_pixel": {"minimum": 0, "title": "Num Involved Pixel", "type": "integer"
+            }, "include_point_positive": {"title": "Include Point Positive", "type": "boolean"
+            }, "translate": {"anyOf": [
+                    {"type": "number"
                     },
-                    {'type': 'integer'
+                    {"type": "integer"
                     }
-                ], 'title': 'Debug Dataset Ratio'
-            }, 'check_dataset': {'default': False, 'title': 'Check Dataset', 'type': 'boolean'
-            }
-        }, 'required': ['debug_dataset_ratio'
-        ], 'title': 'DebuggingConfig', 'type': 'object'
-    }, 'ResumeConfig': {'properties': {'resume': {'title': 'Resume', 'type': 'boolean'
-            }, 'latest_ckpt': {'anyOf': [
-                    {'type': 'string'
+                ], "title": "Translate"
+            }, "translate_range_width": {"anyOf": [
+                    {"type": "number"
                     },
-                    {'type': 'null'
+                    {"type": "integer"
                     }
-                ], 'default': None, 'title': 'Latest Ckpt'
-            }
-        }, 'required': ['resume'
-        ], 'title': 'ResumeConfig', 'type': 'object'
-    }, 'ValConfig': {'properties': {'save_img_ratio': {'anyOf': [
-                    {'type': 'number'
+                ], "title": "Translate Range Width"
+            }, "translate_range_height": {"anyOf": [
+                    {"type": "number"
                     },
-                    {'type': 'integer'
+                    {"type": "integer"
                     }
-                ], 'default': 0.5, 'title': 'Save Img Ratio'
-            }, 'save_img_freq_epoch': {'default': 9, 'title': 'Save Img Freq Epoch', 'type': 'integer'
-            }, 'save_model': {'default': True, 'title': 'Save Model', 'type': 'boolean'
-            }, 'save_model_freq_epoch': {'default': 9, 'title': 'Save Model Freq Epoch', 'type': 'integer'
-            }, 'save_img_iou': {'title': 'Save Img Iou', 'type': 'number'
+                ], "title": "Translate Range Height"
+            }, "sliding_bg_ratio": {"anyOf": [
+                    {"type": "number"
+                    },
+                    {"type": "integer"
+                    }
+                ], "title": "Sliding Bg Ratio"
+            }, "bg_ratio_by_image": {"anyOf": [
+                    {"type": "number"
+                    },
+                    {"type": "integer"
+                    }
+                ], "title": "Bg Ratio By Image"
+            }, "bg_start_train_epoch_by_image": {"minimum": 0, "title": "Bg Start Train Epoch By Image", "type": "integer"
+            }, "bg_start_val_epoch_by_image": {"minimum": 0, "title": "Bg Start Val Epoch By Image", "type": "integer"
             }
-        }, 'required': ['save_img_iou'
-        ], 'title': 'ValConfig', 'type': 'object'
-    }, 'LRConfig': {'properties': {'init_lr': {'title': 'Init Lr', 'type': 'number'
-            }, 'end_lr': {'title': 'End Lr', 'type': 'number'
-            }, 'scheduler': {'default': 'cosine', 'title': 'Scheduler', 'type': 'string'
-            }, 'num_warmup': {'default': 10, 'title': 'Num Warmup', 'type': 'integer'
-            }, 'num_hold': {'default': 0, 'title': 'Num Hold', 'type': 'integer'
+        }, "required": ["use_patch", "centric", "sliding", "width", "height", "overlap_ratio", "num_involved_pixel", "include_point_positive", "translate", "translate_range_width", "translate_range_height", "sliding_bg_ratio", "bg_ratio_by_image", "bg_start_train_epoch_by_image", "bg_start_val_epoch_by_image"
+        ], "title": "PatchConfig", "type": "object"
+    }, "RoiConfig": {"properties": {"use_roi": {"title": "Use Roi", "type": "boolean"
+            }, "from_json": {"title": "From Json", "type": "boolean"
+            }, "top_left_x": {"anyOf": [
+                    {"items": {"type": "integer"
+                        }, "type": "array"
+                    },
+                    {"type": "integer"
+                    },
+                    {"type": "string"
+                    }
+                ], "title": "Top Left X"
+            }, "top_left_y": {"anyOf": [
+                    {"items": {"type": "integer"
+                        }, "type": "array"
+                    },
+                    {"type": "integer"
+                    },
+                    {"type": "string"
+                    }
+                ], "title": "Top Left Y"
+            }, "width": {"anyOf": [
+                    {"items": {"type": "integer"
+                        }, "type": "array"
+                    },
+                    {"type": "integer"
+                    },
+                    {"type": "string"
+                    }
+                ], "title": "Width"
+            }, "height": {"anyOf": [
+                    {"items": {"type": "integer"
+                        }, "type": "array"
+                    },
+                    {"type": "integer"
+                    },
+                    {"type": "string"
+                    }
+                ], "title": "Height"
             }
-        }, 'required': ['init_lr', 'end_lr'
-        ], 'title': 'LRConfig', 'type': 'object'
+        }, "required": ["use_roi", "from_json", "top_left_x", "top_left_y", "width", "height"
+        ], "title": "RoiConfig", "type": "object"
+    }, "TrainConfig": {"properties": {"device": {"enum": ["cpu", "gpu"
+                ], "fronzen": true, "title": "Device", "type": "string"
+            }, "device_ids": {"anyOf": [
+                    {"items": {"type": "integer"
+                        }, "type": "array"
+                    },
+                    {"type": "string"
+                    }
+                ], "fronzen": true, "title": "Device Ids"
+            }, "epochs": {"fronzen": true, "title": "Epochs", "type": "integer"
+            }, "batch_size": {"fronzen": true, "title": "Batch Size", "type": "integer"
+            }, "amp": {"default": false, "fronzen": true, "title": "Amp", "type": "boolean"
+            }, "patience": {"default": 0, "fronzen": true, "title": "Patience", "type": "integer"
+            }, "freeze": {"default": 0, "metadata": {"description": "how many layers you want to freeze"
+                }, "title": "Freeze", "type": "integer"
+            }, "seed_model": {"anyOf": [
+                    {"type": "string"
+                    },
+                    {"type": "null"
+                    }
+                ], "default": null, "fronzen": true, "title": "Seed Model"
+            }, "resume": {"default": false, "title": "Resume", "type": "boolean"
+            }, "loss_fn": {"anyOf": [
+                    {"type": "string"
+                    },
+                    {"type": "null"
+                    }
+                ], "title": "Loss Fn"
+            }, "focal_loss": {"title": "Focal Loss", "type": "boolean"
+            }, "optimizer": {"fronzen": true, "title": "Optimizer", "type": "string"
+            }, "init_lr": {"exclusiveMinimum": 0.0, "title": "Init Lr", "type": "number"
+            }, "end_lr": {"exclusiveMinimum": 0.0, "title": "End Lr", "type": "number"
+            }, "num_warmup": {"default": 10, "title": "Num Warmup", "type": "integer"
+            }, "num_hold": {"default": 0, "title": "Num Hold", "type": "integer"
+            }, "scheduler": {"default": "cosine", "title": "Scheduler", "type": "string"
+            }, "debug_dataset_ratio": {"title": "Debug Dataset Ratio", "type": "number"
+            }, "check_dataset": {"default": false, "title": "Check Dataset", "type": "boolean"
+            }, "bg_weights": {"anyOf": [
+                    {"items": {"type": "number"
+                        }, "type": "array"
+                    },
+                    {"type": "string"
+                    },
+                    {"type": "null"
+                    }
+                ], "default": null, "title": "Bg Weights"
+            }, "bg_weights_applied_epoch": {"anyOf": [
+                    {"items": {"type": "integer"
+                        }, "type": "array"
+                    },
+                    {"type": "string"
+                    },
+                    {"type": "null"
+                    }
+                ], "default": null, "title": "Bg Weights Applied Epoch"
+            }
+        }, "required": ["device", "device_ids", "epochs", "batch_size", "loss_fn", "focal_loss", "optimizer", "init_lr", "end_lr", "debug_dataset_ratio"
+        ], "title": "TrainConfig", "type": "object"
+    }, "PreProcessConfig": {"properties": {"normalize": {"anyOf": [
+                    {"type": "object"
+                    },
+                    {"type": "null"
+                    }
+                ], "title": "Normalize"
+            }
+        }, "required": ["normalize"
+        ], "title": "PreProcessConfig", "type": "object"
+    }, "AugmentationConfig": {"$defs": {"AlbumentationsConfig": {"properties": {"GaussNoise": {"anyOf": [
+                            {"type": "integer"
+                            },
+                            {"type": "number"
+                            },
+                            {"type": "object"
+                            }
+                        ], "default": 0, "metadata": {"description": ""
+                        }, "title": "Gaussnoise"
+                    }, "Blur": {"anyOf": [
+                            {"type": "integer"
+                            },
+                            {"type": "number"
+                            },
+                            {"type": "object"
+                            }
+                        ], "default": 0, "metadata": {"description": ""
+                        }, "title": "Blur"
+                    }, "MedianBlur": {"anyOf": [
+                            {"type": "integer"
+                            },
+                            {"type": "number"
+                            },
+                            {"type": "object"
+                            }
+                        ], "default": 0, "metadata": {"description": ""
+                        }, "title": "Medianblur"
+                    }, "ToGray": {"anyOf": [
+                            {"type": "integer"
+                            },
+                            {"type": "number"
+                            },
+                            {"type": "object"
+                            }
+                        ], "default": 0, "metadata": {"description": ""
+                        }, "title": "Togray"
+                    }, "CLAHE": {"anyOf": [
+                            {"type": "integer"
+                            },
+                            {"type": "number"
+                            },
+                            {"type": "object"
+                            }
+                        ], "default": 0, "metadata": {"description": ""
+                        }, "title": "Clahe"
+                    }, "RandomBrightnessContrast": {"anyOf": [
+                            {"type": "integer"
+                            },
+                            {"type": "number"
+                            },
+                            {"type": "object"
+                            }
+                        ], "default": 0, "metadata": {"description": ""
+                        }, "title": "Randombrightnesscontrast"
+                    }, "RandomGamma": {"anyOf": [
+                            {"type": "integer"
+                            },
+                            {"type": "number"
+                            },
+                            {"type": "object"
+                            }
+                        ], "default": 0, "metadata": {"description": ""
+                        }, "title": "Randomgamma"
+                    }, "ImageCompression": {"anyOf": [
+                            {"type": "integer"
+                            },
+                            {"type": "number"
+                            },
+                            {"type": "object"
+                            }
+                        ], "default": 0, "metadata": {"description": ""
+                        }, "title": "Imagecompression"
+                    }, "HorizontalFlip": {"anyOf": [
+                            {"type": "integer"
+                            },
+                            {"type": "number"
+                            },
+                            {"type": "object"
+                            }
+                        ], "default": 0, "metadata": {"description": ""
+                        }, "title": "Horizontalflip"
+                    }, "VerticalFlip": {"anyOf": [
+                            {"type": "integer"
+                            },
+                            {"type": "number"
+                            },
+                            {"type": "object"
+                            }
+                        ], "default": 0, "metadata": {"description": ""
+                        }, "title": "Verticalflip"
+                    }, "RandomRotate90": {"anyOf": [
+                            {"type": "integer"
+                            },
+                            {"type": "number"
+                            },
+                            {"type": "object"
+                            }
+                        ], "default": 0, "metadata": {"description": ""
+                        }, "title": "Randomrotate90"
+                    }, "Rotate": {"anyOf": [
+                            {"type": "integer"
+                            },
+                            {"type": "number"
+                            },
+                            {"type": "object"
+                            }
+                        ], "default": 0, "metadata": {"description": ""
+                        }, "title": "Rotate"
+                    }, "Transpose": {"anyOf": [
+                            {"type": "integer"
+                            },
+                            {"type": "number"
+                            },
+                            {"type": "object"
+                            }
+                        ], "default": 0, "metadata": {"description": ""
+                        }, "title": "Transpose"
+                    }
+                }, "title": "AlbumentationsConfig", "type": "object"
+            }, "YoloTransformationsConfig": {"properties": {"hsv": {"anyOf": [
+                            {"type": "integer"
+                            },
+                            {"type": "number"
+                            },
+                            {"type": "object"
+                            }
+                        ], "default": {"h": 0, "s": 0, "v": 0
+                        }, "metadata": {"description": ""
+                        }, "title": "Hsv"
+                    }, "degrees": {"anyOf": [
+                            {"type": "integer"
+                            },
+                            {"type": "number"
+                            },
+                            {"type": "object"
+                            }
+                        ], "default": 0, "metadata": {"description": ""
+                        }, "title": "Degrees"
+                    }, "translate": {"anyOf": [
+                            {"type": "integer"
+                            },
+                            {"type": "number"
+                            },
+                            {"type": "object"
+                            }
+                        ], "default": 0, "metadata": {"description": ""
+                        }, "title": "Translate"
+                    }, "scale": {"anyOf": [
+                            {"type": "integer"
+                            },
+                            {"type": "number"
+                            },
+                            {"type": "object"
+                            }
+                        ], "default": 0, "metadata": {"description": ""
+                        }, "title": "Scale"
+                    }, "shear": {"anyOf": [
+                            {"type": "integer"
+                            },
+                            {"type": "number"
+                            },
+                            {"type": "object"
+                            }
+                        ], "default": 0, "metadata": {"description": ""
+                        }, "title": "Shear"
+                    }, "perspective": {"anyOf": [
+                            {"type": "integer"
+                            },
+                            {"type": "number"
+                            },
+                            {"type": "object"
+                            }
+                        ], "default": 0, "metadata": {"description": ""
+                        }, "title": "Perspective"
+                    }, "flipud": {"anyOf": [
+                            {"type": "integer"
+                            },
+                            {"type": "number"
+                            },
+                            {"type": "object"
+                            }
+                        ], "default": 0, "metadata": {"description": ""
+                        }, "title": "Flipud"
+                    }, "fliplr": {"anyOf": [
+                            {"type": "integer"
+                            },
+                            {"type": "number"
+                            },
+                            {"type": "object"
+                            }
+                        ], "default": 0, "metadata": {"description": ""
+                        }, "title": "Fliplr"
+                    }, "mosaic": {"anyOf": [
+                            {"type": "integer"
+                            },
+                            {"type": "number"
+                            },
+                            {"type": "object"
+                            }
+                        ], "default": 0, "metadata": {"description": ""
+                        }, "title": "Mosaic"
+                    }, "mixup": {"anyOf": [
+                            {"type": "integer"
+                            },
+                            {"type": "number"
+                            },
+                            {"type": "object"
+                            }
+                        ], "default": 0, "metadata": {"description": ""
+                        }, "title": "Mixup"
+                    }, "copy_paste": {"anyOf": [
+                            {"type": "integer"
+                            },
+                            {"type": "number"
+                            },
+                            {"type": "object"
+                            }
+                        ], "default": 0, "metadata": {"description": ""
+                        }, "title": "Copy Paste"
+                    }, "paste_in": {"anyOf": [
+                            {"type": "integer"
+                            },
+                            {"type": "number"
+                            },
+                            {"type": "object"
+                            }
+                        ], "default": 0, "metadata": {"description": ""
+                        }, "title": "Paste In"
+                    }
+                }, "title": "YoloTransformationsConfig", "type": "object"
+            }
+        }, "properties": {"Albumentations": {"allOf": [
+                    {"$ref": "#/$defs/AlbumentationsConfig"
+                    }
+                ], "default": {}
+            }, "Customs": {"allOf": [
+                    {"$ref": "#/$defs/YoloTransformationsConfig"
+                    }
+                ], "default": {}
+            }
+        }, "title": "AugmentationConfig", "type": "object"
+    }, "ValConfig": {"properties": {"save_img_ratio": {"anyOf": [
+                    {"type": "number"
+                    },
+                    {"type": "integer"
+                    }
+                ], "default": 0.5, "title": "Save Img Ratio"
+            }, "save_img_freq_epoch": {"default": 9, "title": "Save Img Freq Epoch", "type": "integer"
+            }, "save_model": {"default": true, "title": "Save Model", "type": "boolean"
+            }, "save_model_freq_epoch": {"default": 9, "title": "Save Model Freq Epoch", "type": "integer"
+            }, "save_img_iou": {"title": "Save Img Iou", "type": "number"
+            }, "save_model_metrics": {"anyOf": [
+                    {"items": {"type": "string"
+                        }, "type": "array"
+                    },
+                    {"type": "string"
+                    }
+                ], "default": ["avg_iou", "avg_acc"
+                ], "title": "Save Model Metrics"
+            }
+        }, "required": ["save_img_iou"
+        ], "title": "ValConfig", "type": "object"
     }
 }

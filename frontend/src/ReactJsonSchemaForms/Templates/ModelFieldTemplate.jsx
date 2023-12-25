@@ -16,7 +16,7 @@ function ModelFieldTemplate(props) {
       <div className='description'>
         {props.description}
       </div>
-      <Grid container={true} spacing={1} className='container'>
+      <Grid container={true} spacing={1} className='container' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         {props.properties.map((element, index) => {
           return (
             <div className='elements'>{element.content}</div>
