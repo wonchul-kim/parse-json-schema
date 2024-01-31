@@ -6,7 +6,9 @@
 ## Backend 
 
 ```cmd
-python -m uvicorn main:app --reload
+cd backend
+docker build -t fastapi-app .
+docker run -it -p 8000:8000 fastapi-app
 ```
 
 #### json-schema
@@ -80,7 +82,9 @@ For example,
 ## FrontEnd
 
 ```
-npm run start
+cd frontend
+docker build -t react-app
+docker run -it -p 3000:3000 react-app
 ```
 
 #### By `react-json-schema-form`
